@@ -1,10 +1,11 @@
 package main
 
 import (
-	"fmt"
+	_ "testblog/routers"
+	"github.com/astaxie/beego"
 )
 
-func main(){
-	fmt.Println("this is my first blog")
+func main() {
+	beego.Run()
 }
 
