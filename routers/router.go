@@ -2,19 +2,20 @@ package routers
 
 import (
 	"github.com/astaxie/beego"
-	"blog/controllers/admin"
-        "blog/controllers/blog"
-        "blog/controllers/login"
+	//"blog/controllers/admin"
+        "testblog/controllers/blog"
+        //"blog/controllers/login"
 )
 
 func init() {
-        beego.Router("/login", &login.LoginController{})
-    beego.Router("/logout", &login.LoginController{}, "*:Logout")
+        //beego.Router("/login", &login.LoginController{})
+    //beego.Router("/logout", &login.LoginController{}, "*:Logout")
 
-    beego.Router("/", &controllers.MainController{})
+    beego.Router("/", &blog.MainController{})
     beego.Router("/page/?:page", &blog.MainController{})
-    beego.Router("/show/:id", &blog.ShowController{})
+    //beego.Router("/show/:id", &blog.ShowController{})
 
+    /*
     ns :=
     beego.NewNamespace("/admin",
             beego.NSRouter("/", &admin.IndexController{}),
@@ -32,4 +33,5 @@ func init() {
 	    ),
      )
      beego.AddNamespace(ns)
+     */
 }
