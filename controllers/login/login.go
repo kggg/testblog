@@ -2,7 +2,7 @@ package  login
 
 import (
         "github.com/astaxie/beego"
-	"blog/models"
+	"testblog/models"
 	"github.com/gogather/com"
 )
 
@@ -15,7 +15,6 @@ type LoginController struct {
 type Login struct{
 	name string
 	password string
-	email string
 }
 
 func (c *LoginController) Prepare() {
@@ -53,7 +52,7 @@ func (c *LoginController) Post(){
 
 		     c.SetSession("username", username)
 		     c.SetSession("userid", user.Id)
-	             c.Redirect("/", 302)
+	             c.Redirect("/admin", 302)
 	        }else {
 			c.Ctx.WriteString("passwd invalid")
 		}

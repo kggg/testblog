@@ -1,7 +1,6 @@
 body{
-	/*background: #f1f1f1;*/
-	background: #dddddd;
-	padding-top: 55px;
+	background: #ffffff;
+        /* padding-top: 55px; */
 }
 
 /*****  background color ***********/
@@ -32,6 +31,7 @@ body{
 }
 
 
+/******************/
 .margin-tb-10{
 	margin-top:10px;
 	margin-bottom: 10px;
@@ -45,8 +45,16 @@ body{
 	margin-top: 5px;
 }
 
+.margin-top-20{
+	margin-top: 20px;
+}
+
 .margin-bottom-5{
 	margin-bottom: 5px;
+}
+
+.margin-bottom-20{
+        margin-bottom: 20px;
 }
 
 .padding-auto-0{

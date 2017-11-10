@@ -5,6 +5,8 @@ import (
 	"github.com/astaxie/beego"
 	"reflect"
 	"fmt"
+	"math/rand"
+	"time"
 )
 
 func Adds(b, a interface{}) (interface{}, error) {
@@ -94,10 +96,16 @@ func Subtract(b, a interface{}) (interface{}, error) {
 	}
 }
 
+func RandPicNum() int {
+	rand.Seed(time.Now().UnixNano())
+	return rand.Intn(10)
+}
+
 
 func main() {
 	beego.AddFuncMap("adds", Adds)
 	beego.AddFuncMap("subtract", Subtract)
+	beego.AddFuncMap("randpicnum", RandPicNum)
 	beego.Run()
 }
 

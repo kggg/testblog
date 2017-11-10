@@ -23,7 +23,6 @@ func init() {
 
 func FindUser(username string) (User, error) {
 	o := orm.NewOrm()
-	o.Using("default")
 	user := User{Name: username}
 	err := o.Read(&user, "name")
 

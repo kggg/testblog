@@ -1,23 +1,15 @@
 package blog
 
 import (
-	"github.com/astaxie/beego"
 	"testblog/models"
 	"strconv"
+	"strings"
 )
 
 type MainController struct {
-	beego.Controller
+	BaseController
 }
 
-func (c *MainController) Prepare() {
-	section, err := models.FindAllSection()
-	c.CheckErr(err, "get section error")
-	label, err := models.FindAllLabel()
-	c.CheckErr(err, "get label error")
-	c.Data["section"] = section
-	c.Data["label"] = label
-}
 
 func (c *MainController) Get() {
 	page := c.Ctx.Input.Param(":page")
@@ -25,7 +17,7 @@ func (c *MainController) Get() {
         if err != nil {
 		intpage = 1
 	}
-        start := (intpage -1) * 10
+        start := (intpage -1) * 5
 	count, err := models.CountBlog()
         c.CheckErr(err, "get blog count error")
 	pagetotal := int(count/10)
@@ -41,14 +33,95 @@ func (c *MainController) Get() {
 	c.TplName = "blog/index.tpl"
 }
 
-func (this *MainController) Resp(status bool, str string) {
-        this.Data["json"] = &map[string]interface{}{"status": status, "info": str}
-        this.ServeJSON()
-        this.StopRun()
+
+func (c *MainController) FindSection() {
+        var page int
+	c.Ctx.Input.Bind(&page, "page")
+        if page == 0  {
+                page = 1
+        }
+        start := (page -1) * 20
+	id, err := strconv.Atoi(c.Ctx.Input.Param(":id"))
+	c.CheckErr(err, "get section id error")
+        count, err := models.CountBlogBySectionId(id)
+        c.CheckErr(err, "get blog count error")
+        pagetotal := int(count/20)
+        if b := count % 20; b != 0 {
+                pagetotal += 1;
+        }
+        blog, err := models.FindBlogBySectionId(id, start)
+        c.CheckErr(err, "get blog error")
+	c.Data["Sid"] = id
+        c.Data["Blog"] = blog
+        c.Data["Page"] = page
+        c.Data["Pagetotal"] = pagetotal
+        c.Layout = "layout/main.tpl"
+        c.TplName = "blog/section/section.tpl"
 }
 
-func (this *MainController) CheckErr(err error, str string){
-	if err != nil {
-		this.Resp(false, str)
-	}
+func (c *MainController) FindLabel() {
+        var page int
+        c.Ctx.Input.Bind(&page, "page")
+        if page == 0  {
+                page = 1
+        }
+        start := (page -1) * 20
+        id, err := strconv.Atoi(c.Ctx.Input.Param(":id"))
+        c.CheckErr(err, "get section id error")
+        count, err := models.CountBlogByLabelId(id)
+        c.CheckErr(err, "get blog count error")
+        pagetotal := int(count/20)
+        if b := count % 20; b != 0 {
+                pagetotal += 1;
+        }
+        blog, err := models.FindBlogByLabelId(id, start)
+        c.CheckErr(err, "get blog error")
+        c.Data["Lid"] = id
+        c.Data["Blog"] = blog
+        c.Data["Page"] = page
+        c.Data["Pagetotal"] = pagetotal
+        c.Layout = "layout/main.tpl"
+        c.TplName = "blog/label/label.tpl"
+}
+
+
+func (c *MainController) SearchBlog() {
+	search := c.GetString("search")
+	search = strings.TrimSpace(search)
+	//blog, num, err := models.SearchBlog(search)
+	blog, err := models.SearchBlog(search)
+	c.CheckErr(err, "get search key from data error")
+        /*
+        var page int
+        c.Ctx.Input.Bind(&page, "page")
+        if page == 0  {
+                page = 1
+        }
+        start := (page -1) * 20
+        id, err := strconv.Atoi(c.Ctx.Input.Param(":id"))
+        c.CheckErr(err, "get section id error")
+        pagetotal := int(num/20)
+        if b := num % 20; b != 0 {
+                pagetotal += 1;
+        }
+	*/
+	c.Data["Blog"] = blog
+        c.Layout = "layout/main.tpl"
+        c.TplName = "blog/search/search.tpl"
+}
+
+
+type ShowController struct {
+	BaseController
+}
+
+func (c *ShowController) Get(){
+	pid, err := strconv.Atoi(c.Ctx.Input.Param(":id"))
+	c.CheckErr(err, "blog id atoi error")
+	blog, err := models.FindBlogById(pid)
+	c.CheckErr(err, "get blog by id error")
+	c.Data["Blog"] = blog
+	c.Layout = "layout/main.tpl"
+	c.TplName = "blog/show.tpl"
+
 }
