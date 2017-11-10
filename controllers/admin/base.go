@@ -10,6 +10,12 @@ type BaseController struct {
 }
 
 func (c *BaseController) Prepare() {
+        username := c.GetSession("username")
+        if username == false || username == nil {
+                c.Redirect("/login", 302)
+        }
+        c.Data["Username"] = username
+	
 }
 
 

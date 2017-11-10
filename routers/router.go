@@ -20,10 +20,10 @@ func init() {
 
     beego.Router("/admin",&admin.IndexController{})
     beego.Router("/admin/article",&admin.ArticleController{})
-    /*
     beego.Router("/admin/article/add",&admin.ArticleController{},"*:AddArticle")
     beego.Router("/admin/article/edit/:id([0-9]+)",&admin.ArticleController{},"*:EditArticle")
     beego.Router("/admin/article/delete/:id([0-9]+)",&admin.ArticleController{},"*:DelArticle")
+    /*
     */
 
 }
