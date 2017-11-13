@@ -23,6 +23,11 @@ func init() {
     beego.Router("/admin/article/add",&admin.ArticleController{},"*:AddArticle")
     beego.Router("/admin/article/edit/:id([0-9]+)",&admin.ArticleController{},"*:EditArticle")
     beego.Router("/admin/article/delete/:id([0-9]+)",&admin.ArticleController{},"*:DelArticle")
+
+    beego.Router("/admin/label",&admin.LabelController{})
+    beego.Router("/admin/label/add",&admin.LabelController{},"*:AddLabel")
+    beego.Router("/admin/label/edit/:id([0-9]+)",&admin.LabelController{},"*:EditLabel")
+    beego.Router("/admin/label/delete/:id([0-9]+)",&admin.LabelController{},"*:DelLabel")
     /*
     */
 

@@ -18,18 +18,10 @@
         <div class="col-xs-12">
           <div class="box box-info">
             <div class="box-header with-border">
-              <label class="btn btn-default">新增文章</label>
-              <a href="/admin/article" class="btn btn-info"><i class="fa fa-list"></i> </a>
-              <!-- tools box -->
-              <div class="pull-right box-tools">
-                <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip"
-                        title="Collapse">
-                  <i class="fa fa-minus"></i></button>
-                <button type="button" class="btn btn-info btn-sm" data-widget="remove" data-toggle="tooltip"
-                        title="Remove">
-                  <i class="fa fa-times"></i></button>
-              </div>
-              <!-- /. tools -->
+               <ul class="nav nav-tabs">
+                 <li><a href="/admin/article"><i class="fa fa-list"></i> 文章列表</a></li>
+                 <li class="active"><a href="/admin/article/add"><i class="fa fa-plus"></i> 新增文章</a></li>
+               </ul>
             </div>
             <!-- /.box-header -->
             <div class="box-body pad">

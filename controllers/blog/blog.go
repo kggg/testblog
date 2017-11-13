@@ -66,8 +66,8 @@ func (c *MainController) FindLabel() {
                 page = 1
         }
         start := (page -1) * 20
-        id, err := strconv.Atoi(c.Ctx.Input.Param(":id"))
-        c.CheckErr(err, "get section id error")
+	id, err := strconv.Atoi(c.Ctx.Input.Param(":id"))
+        c.CheckErr(err, "get Label id error")
         count, err := models.CountBlogByLabelId(id)
         c.CheckErr(err, "get blog count error")
         pagetotal := int(count/20)
@@ -92,18 +92,6 @@ func (c *MainController) SearchBlog() {
 	blog, err := models.SearchBlog(search)
 	c.CheckErr(err, "get search key from data error")
         /*
-        var page int
-        c.Ctx.Input.Bind(&page, "page")
-        if page == 0  {
-                page = 1
-        }
-        start := (page -1) * 20
-        id, err := strconv.Atoi(c.Ctx.Input.Param(":id"))
-        c.CheckErr(err, "get section id error")
-        pagetotal := int(num/20)
-        if b := num % 20; b != 0 {
-                pagetotal += 1;
-        }
 	*/
 	c.Data["Blog"] = blog
         c.Layout = "layout/main.tpl"

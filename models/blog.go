@@ -39,7 +39,7 @@ func FindBlogByPageId( start int)([]Blog, error){
 func FindBlogById(id int) (Blog, error) {
 	o := orm.NewOrm()
 	blog := Blog{Id: id}
-	err := o.Read(&blog, "id")
+	err := o.QueryTable("blog").Filter("id", id).RelatedSel().One(&blog)
 	return blog, err
 }
 
@@ -91,12 +91,10 @@ func CountBlogByLabelId(id int)(int64 , error){
         return cnt, err
 }
 
-/*
-func AddBlog(userid int, subid int, cateid int, title string, content string)(int64 , error){
+func AddBlog(sid int, lid int, title string, content string)(int64 , error){
 	o := orm.NewOrm()
-	o.Using("default")
-	sql := "insert into blog(user_id, subject_id, category_id, title, content) values( ?, ?, ?, ?, ?)"
-	res, err := o.Raw(sql, userid, subid,cateid,title,content).Exec()
+	sql := "insert into blog(section_id, label_id, title, content) values( ?, ?, ?, ?)"
+	res, err := o.Raw(sql, sid,lid,title,content).Exec()
 	if nil != err {
 		return 0, err
 	} else {
@@ -105,14 +103,25 @@ func AddBlog(userid int, subid int, cateid int, title string, content string)(in
 
 }
 
+func UpdateBlog(id int, sid int, lid int, title string, content string)(int64 , error){
+        o := orm.NewOrm()
+        sql := "update blog set section_id=?,label_id=?,title=?, content=? where id=?"
+        res, err := o.Raw(sql, sid,lid,title,content, id).Exec()
+        if nil != err {
+                return 0, err
+        } else {
+                return res.LastInsertId()
+        }
+
+}
+
+
 
 func DelBlog(id int)(int64, error){
         o := orm.NewOrm()
-        o.Using("default")
         if num, err := o.Delete(&Blog{Id: id}); err == nil {
                 return num, err
 	}else{
 		return 0, err
 	}
 }
-*/

@@ -30,13 +30,31 @@
             <li class="header">MAIN</li>
             <!-- Optionally, you can add icons to the links -->
             <li id="dashboard"><a href="/admin"><i class="fa fa-dashboard"></i>
-               <span>首页</span></a></li>
+               <span>首页</span></a>
+            </li>
+
+            <li class="treeview" id="section">
+                 <a href="#"><i class="fa fa-list-alt"></i>  <span>板块管理</span> <i class="fa fa-angle-left pull-right"></i></a>
+                 <ul class="treeview-menu">
+                    <li><a href="/admin/section"><i class="fa fa-circle-o"></i>板块列表</a></li>
+                    <li><a href="/admin/section/add"><i class="fa fa-circle-o"></i>新增板块</a></li>
+                 </ul>
+            </li>
+
+            <li class="treeview" id="label">
+                 <a href="#"><i class="fa fa-list-alt"></i>  <span>标签管理</span> <i class="fa fa-angle-left pull-right"></i></a>
+                 <ul class="treeview-menu">
+                    <li><a href="/admin/label"><i class="fa fa-circle-o"></i>标签管理</a></li>
+                    <li><a href="/admin/label/add"><i class="fa fa-circle-o"></i>新增标签</a></li>
+                 </ul>
+            </li>
+
+
             <li class="treeview" id="article">
                  <a href="#"><i class="fa fa-list-alt"></i>  <span>文章管理</span> <i class="fa fa-angle-left pull-right"></i></a>
                  <ul class="treeview-menu">
-                    <li><a href="/admin/article/section"><i class="fa fa-circle-o"></i>板块列表</a></li>
-                    <li><a href="/admin/article/label"><i class="fa fa-circle-o"></i>标签管理</a></li>
                     <li><a href="/admin/article"><i class="fa fa-circle-o"></i>文章管理</a></li>
+                    <li><a href="/admin/article/add"><i class="fa fa-circle-o"></i>新增文章</a></li>
                  </ul>
             </li>
 
