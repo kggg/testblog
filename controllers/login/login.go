@@ -39,7 +39,7 @@ func (c *LoginController) Post(){
                 return		
 	}
 	//need to verify with mysql user table
-        user, err := models.FindUser(username)
+        user, err := models.FindUserByName(username)
         if err != nil {
                 result["status"] = "false"
                 result["message"] = "用户不存在"

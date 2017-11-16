@@ -28,7 +28,19 @@ func init() {
     beego.Router("/admin/label/add",&admin.LabelController{},"*:AddLabel")
     beego.Router("/admin/label/edit/:id([0-9]+)",&admin.LabelController{},"*:EditLabel")
     beego.Router("/admin/label/delete/:id([0-9]+)",&admin.LabelController{},"*:DelLabel")
+
+    beego.Router("/admin/section",&admin.SectionController{})
+    beego.Router("/admin/section/add",&admin.SectionController{},"*:AddSection")
+    beego.Router("/admin/section/edit/:id([0-9]+)",&admin.SectionController{},"*:EditSection")
+    beego.Router("/admin/section/delete/:id([0-9]+)",&admin.SectionController{},"*:DelSection")
+
+    beego.Router("/admin/user",&admin.UserController{})
+    beego.Router("/admin/user/add",&admin.UserController{},"*:AddUser")
+    beego.Router("/admin/user/edit/:id([0-9])+",&admin.UserController{},"*:EditUser")
+    beego.Router("/admin/user/delete/:id([0-9])+",&admin.UserController{},"*:DelUser")
     /*
+    beego.Router("/admin/system",&admin.SystemController{})
+    beego.Router("/admin/backup",&admin.BackupController{})
     */
 
 }

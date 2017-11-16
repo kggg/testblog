@@ -28,3 +28,18 @@ func (l *LabelForm) Valid(v *validation.Validation){
 }
 
 
+type UserForm struct{
+	Name     string   `valid:"Required;MaxSize(100)`
+	Password  string   `valid:"Required;MaxSize(150)`
+	Repassword  string  `valid:"Required;MaxSize(150)`
+}
+
+func (u *UserForm) Valid(v *validation.Validation){
+    if u.Password != u.Repassword {
+        // 通过 SetError 设置 Name 的错误信息，HasErrors 将会返回 true
+        v.SetError("Password","the password not same")
+    }
+    u.Name = strings.TrimSpace(u.Name)
+    u.Password = strings.TrimSpace(u.Password)
+    u.Repassword = strings.TrimSpace(u.Repassword)
+}
